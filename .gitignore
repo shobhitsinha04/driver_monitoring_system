@@ -1,0 +1,5 @@
+venv/
+dataset/
+mrlEyes_2018_01.zip
+*.pyc
+.DS_Store
