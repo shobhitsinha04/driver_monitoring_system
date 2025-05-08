@@ -1,0 +1,48 @@
+# Driver Fatigue Detection System Configuration
+
+# Video processing settings
+video:
+  resize_width: 480  # Reduced from 640
+  resize_height: 360  # Reduced from 480
+  fps_target: 30
+  buffer_size: 5
+  enable_threading: true
+
+# Face detection settings (MTCNN)
+face_detection:
+  min_face_size: 60  # Increased from 40 to reduce false positives
+  thresholds: [0.7, 0.8, 0.8]  # Higher thresholds for better performance
+  optimize_performance: true
+  frame_skip: 3  # Increased from 2 for better performance
+
+# Eye analysis settings
+eye_analysis:
+  ear_threshold: 0.2  # Lower from 0.25 to detect more subtle eye closures
+  consecutive_frames: 2  # Reduce from 3 to make detection more sensitive
+  blink_frequency_threshold: 25  # Lower to detect fatigue earlier
+
+# Fatigue detection settings
+fatigue_detection:
+  consecutive_closed_threshold: 5
+  fatigue_score_threshold: 8
+  blink_time_threshold: 0.3
+  reset_interval: 60  # Increased to reduce computational load
+  detection_confidence_threshold: 0.65
+
+# Alert system settings
+alerts:
+  sound_file: "data/alert.wav"
+  cooldown: 10
+  visual_alert_duration: 3
+
+# Models
+models:
+  eye_state_model: "models/eye_state_model.pt"
+  face_landmark_model: "models/face_landmark_model.pt"
+
+# OpenAI settings
+openai:
+  api_key: ""  # Set via environment variable OPENAI_API_KEY
+  model: "gpt-4"
+  generate_summary: true
+  feedback_interval: 60
